@@ -35,21 +35,33 @@ test_ds = torch.utils.data.DataLoader(dataset=test_dataset,
                                       batch_size=batch_size, 
                                       shuffle=False)
 
-# plot first few images
-examples = iter(test_ds)
-example_data, example_targets = examples.next()
+# Specify the image classes
+classes = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog",
+          "horse", "ship", "truck"]
 
-for i in range(9):
-    # define subplot
-    plt.subplot(330 + 1 + i)
-    # plot raw pixel data
-    plt.imshow(example_data[i][0], cmap=plt.get_cmap('gray'))
-    # if you want to invert color, you can use 'gray_r'. this can be used only for MNIST, Fashion MNIST not cifar10
-    # pyplot.imshow(trainX[i], cmap=pyplot.get_cmap('gray_r'))
+# Helper function to display the image
+def imshow(img):
+    # Un-normalize and display the image
+    img = img / 2 + 0.5
+    # Convert from tensor image
+    plt.imshow(np.transpose(img, (1,2,0)))
+
+# Get one batch of training images
+dataiter = iter(test_ds)
+images, labels = dataiter.next()
+# Convert images to numpy for display
+images = images.numpy()
+
+# Plot the images in the batch
+fig = plt.figure(figsize=(6, 6))
+
+# Display 20 images
+for idx in np.arange(9):
+    ax = fig.add_subplot(3, 9/3, idx+1, xticks=[], yticks=[])
+    imshow(images[idx])
+    ax.set_title(classes[labels[idx]])
     
-# show the figure
-plt.show()
-
+    
 # 3-Layers Convolution neural network with one hidden layer
 class CNN_Model(nn.Module):
     def __init__(self):
