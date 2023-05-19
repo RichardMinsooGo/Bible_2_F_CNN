@@ -36,7 +36,6 @@ M1. Import Libraries for Model Engineering
 import torch.nn as nn
 import torch.optim as optimizers
 
-
 np.random.seed(123)
 torch.manual_seed(123)
 
@@ -148,6 +147,7 @@ M7. Define Loss Fumction
 '''
 
 criterion = nn.CrossEntropyLoss()
+
 '''
 M8. Define train loop
 '''

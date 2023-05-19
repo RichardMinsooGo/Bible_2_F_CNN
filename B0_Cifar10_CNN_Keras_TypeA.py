@@ -7,8 +7,6 @@ D1. Import Libraries for Data Engineering
 '''
 import tensorflow as tf
 
-import matplotlib.pyplot as plt
-
 '''
 D2. Load Cifar10 data / Only for Toy Project
 '''
@@ -17,6 +15,7 @@ D2. Load Cifar10 data / Only for Toy Project
 cifar10 = tf.keras.datasets.cifar10
 
 (X_train, Y_train), (X_test, Y_test) = cifar10.load_data()
+
 '''
 D3. Data Preprocessing
 '''
@@ -24,10 +23,12 @@ D3. Data Preprocessing
 X_train, X_test = X_train / 255.0, X_test / 255.0
 
 print(Y_train[0:10])
+print(X_train.shape)
 
 '''
 D4. EDA(? / Exploratory data analysis)
 '''
+import matplotlib.pyplot as plt
 
 # plot first few images
 for i in range(9):
@@ -62,7 +63,6 @@ EPOCHS = 30
 M3. Build NN model
 '''
 # in the case of Keras or TF2, type shall be [image_size, image_size, 1]
-
 model = Sequential([
     Conv2D(filters=64, kernel_size=3, activation=tf.nn.relu, padding='SAME',input_shape=(32, 32, 3)),
     MaxPool2D(padding='SAME'),
@@ -77,6 +77,7 @@ model = Sequential([
 ])
 
 model.summary()
+
 '''
 M4. Optimizer
 '''
@@ -104,7 +105,7 @@ print('test_loss: {:.3f}, test_acc: {:.3f}'.format(
 ))
 
 '''
-M8. [Opt] Assess model performance
+M7. [Opt] Assess model performance
 '''
 model.evaluate(X_test,  Y_test, verbose=2)              
 

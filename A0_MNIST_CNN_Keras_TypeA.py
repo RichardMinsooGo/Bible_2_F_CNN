@@ -8,6 +8,7 @@ D1. Import Libraries for Data Engineering
 import tensorflow as tf
 
 import matplotlib.pyplot as plt
+
 '''
 D2. Load MNIST data / Only for Toy Project
 '''
@@ -32,6 +33,7 @@ D3. Data Preprocessing
 X_train, X_test = X_train / 255.0, X_test / 255.0
 
 print(Y_train[0:10])
+print(X_train.shape)
 
 '''
 D4. EDA(? / Exploratory data analysis)
@@ -65,11 +67,11 @@ M2. Set Hyperparameters
 hidden_size = 256
 output_dim = 10      # output layer dimensionality = num_classes
 EPOCHS = 30
+
 '''
 M3. Build NN model
 '''
 # in the case of Keras or TF2, type shall be [image_size, image_size, 1]
-
 model = Sequential([
     Conv2D(filters=64, kernel_size=3, activation=tf.nn.relu, padding='SAME',input_shape=(28, 28, 1)),
     MaxPool2D(padding='SAME'),
@@ -84,6 +86,7 @@ model = Sequential([
 ])
 
 model.summary()
+
 '''
 M4. Optimizer
 '''
@@ -111,7 +114,7 @@ print('test_loss: {:.3f}, test_acc: {:.3f}'.format(
 ))
 
 '''
-M8. [Opt] Assess model performance
+M7. [Opt] Assess model performance
 '''
 model.evaluate(X_test,  Y_test, verbose=2)              
 

@@ -34,15 +34,10 @@ M1. Import Libraries for Model Engineering
 '''
 
 import torch.nn as nn
-import torch.nn.functional as F
 import torch.optim as optimizers
-
 
 np.random.seed(123)
 torch.manual_seed(123)
-
-# Device configuration
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 '''
 M2. Set Hyperparameters
